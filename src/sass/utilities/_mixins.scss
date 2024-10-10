@@ -1,0 +1,27 @@
+@mixin summary-parent {
+	margin: 1em 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@mixin summary-text {
+	font-size: 1.2rem;
+	color: var(--rose-500);
+}
+
+@mixin summary-btn {
+	font-weight: 700;
+	font-size: 1.7rem;
+}
+
+@mixin order-btn {
+	display: block;
+	margin: 0 auto;
+	margin-top: 1.5em;
+	padding: 0.8em 6em;
+	background-color: var(--red);
+	border-radius: 1.5em;
+	color: white;
+	font-size: 1.5rem;
+}
