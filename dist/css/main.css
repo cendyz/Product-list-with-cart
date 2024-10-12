@@ -59,9 +59,9 @@ table {
 }
 
 body {
-  display: grid;
-  grid-template-columns: 1fr;
-  place-items: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
   font-family: "Red Hat Text", sans-serif;
   background-color: var(--rose-100);
   color: var(--rose-900);
@@ -86,20 +86,65 @@ body {
   border-radius: 0.7em;
 }
 .main__box-btn {
-  position: absolute;
-  top: 13.6em;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 16em;
+  left: 50%;
+  width: 140px;
+  transform: translateX(-50%);
   padding: 0.7em 1.8em;
   border-radius: 1.5em;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 600;
   background-color: white;
   border: 1px solid var(--rose-900);
 }
 .main__box-btn img {
   margin-right: 0.5em;
+}
+.main__box-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 16em;
+  left: 50%;
+  width: 140px;
+  transform: translateX(-50%);
+  padding: 0.7em 1.8em;
+  border-radius: 1.5em;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: white;
+  border: 1px solid var(--rose-900);
+  display: none;
+  padding: 0.7em 0.8em;
+  justify-content: space-between;
+  background-color: var(--red);
+  border: 1px solid transparent;
+  color: white;
+  cursor: default;
+}
+.main__box-select-span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3em;
+  border-radius: 50%;
+  border: 1px solid var(--rose-100);
+  cursor: pointer;
+  z-index: 100;
+}
+.main__box-select-span img {
+  z-index: 10;
+}
+.main__box-select-span:nth-child(1) {
+  padding: 0.6em 0.3em;
+}
+.main__box-select img {
+  margin-right: 0;
 }
 .main__box-type {
   font-size: 1.4rem;
@@ -197,7 +242,7 @@ body {
   display: block;
   margin: 0 auto;
   margin-top: 1.5em;
-  padding: 0.8em 6em;
+  padding: 0.8em 4.5em;
   background-color: var(--red);
   border-radius: 1.5em;
   color: white;
@@ -205,9 +250,13 @@ body {
 }
 
 .popup {
-  position: fixed;
+  display: none;
+  position: absolute;
   width: 100%;
-  height: 85%;
+  min-height: 100vh;
+  height: -moz-fit-content;
+  height: fit-content;
+  top: 6em;
   padding: 1.5em;
   border-top-left-radius: 1em;
   border-top-right-radius: 1em;
@@ -234,6 +283,7 @@ body {
   border-radius: 0.3em;
 }
 .popup-box-item {
+  margin-bottom: 1em;
   display: flex;
   -moz-column-gap: 0.8em;
        column-gap: 0.8em;
@@ -286,11 +336,20 @@ body {
   display: block;
   margin: 0 auto;
   margin-top: 1.5em;
-  padding: 0.8em 6em;
+  padding: 0.8em 4.5em;
   background-color: var(--red);
   border-radius: 1.5em;
   color: white;
   font-size: 1.5rem;
+}
+
+.cart-box {
+  display: none;
+}
+
+.plus,
+.minus {
+  pointer-events: none;
 }
 
 .none {

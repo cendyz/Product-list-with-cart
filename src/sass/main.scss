@@ -12,9 +12,9 @@
 }
 
 body {
-	display: grid;
-	grid-template-columns: 1fr;
-	place-items: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
 	font-family: "Red Hat Text", sans-serif;
 	background-color: var(--rose-100);
 	color: var(--rose-900);
@@ -39,20 +39,42 @@ body {
 			border-radius: 0.7em;
 		}
 		&-btn {
-			position: absolute;
-			top: 13.6em;
-			left: 50%;
-			transform: translateX(-50%);
-			display: flex;
-			padding: 0.7em 1.8em;
-			border-radius: 1.5em;
-			font-size: 1.4rem;
-			font-weight: 600;
-			background-color: white;
-			border: 1px solid var(--rose-900);
+			@include add-cart-box;
 
 			img {
 				margin-right: 0.5em;
+			}
+		}
+		&-select {
+			@include add-cart-box;
+			display: none;
+			padding: 0.7em 0.8em;
+			justify-content: space-between;
+			background-color: var(--red);
+			border: 1px solid transparent;
+			color: white;
+			cursor: default;
+
+			&-span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 0.3em;
+				border-radius: 50%;
+				border: 1px solid var(--rose-100);
+				cursor: pointer;
+				z-index: 100;
+				img {
+					z-index: 10;
+				}
+
+				&:nth-child(1) {
+					padding: 0.6em 0.3em;
+				}
+			}
+
+			img {
+				margin-right: 0;
 			}
 		}
 
@@ -150,9 +172,12 @@ body {
 	}
 }
 .popup {
-	position: fixed;
+	display: none;
+	position: absolute;
 	width: 100%;
-	height: 85%;
+	min-height: 100vh;
+	height: fit-content;
+	top: 6em;
 	padding: 1.5em;
 	border-top-left-radius: 1em;
 	border-top-right-radius: 1em;
@@ -178,6 +203,7 @@ body {
 		background-color: var(--rose-50);
 		border-radius: 0.3em;
 		&-item {
+			margin-bottom: 1em;
 			display: flex;
 			column-gap: 0.8em;
 			&-img {
@@ -224,6 +250,15 @@ body {
 	&-confirm {
 		@include order-btn;
 	}
+}
+
+.cart-box {
+	display: none;
+}
+
+.plus,
+.minus {
+	pointer-events: none;
 }
 
 .none {
