@@ -16,7 +16,7 @@
 		<main class="main">
 			<h1 class="main__title">Desserts</h1>
 			<div class="main__box">
-				<div class="main__box-container">
+				<div class="main__box-item">
 					<div class="main__box-container">
 						<picture class="main__box-container-picture">
 							<source srcset="" />
@@ -33,18 +33,83 @@
 							<button class="main__box-container-select-icon minus">
 								<img src="../src/img/icon-decrement-quantity.svg" alt="minus icon" />
 							</button>
-							<p class="main__box-container-select-quanity">1</p>
+							<p class="main__box-container-select-quanity" data-setting="quanity" data-index="0">1</p>
 							<button class="main__box-container-select-icon plus">
 								<img src="../src/img/icon-increment-quantity.svg" alt="plus icon" />
 							</button>
 						</div>
 					</div>
+					<div class="main__box-text">
+						<p class="main__box-text-type">Waffle</p>
+						<p class="main__box-text-name">Waffle with Berries</p>
+						<p class="main__box-text-price">$6.50</p>
+					</div>
 				</div>
-				<div class="main__box-text">
-					<p class="main__box-text-type">Waffle</p>
-					<p class="main__box-text-name">Waffle with Berries</p>
-					<p class="main__box-text-price">$6.50</p>
+				<div class="main__box-item">
+					<div class="main__box-container">
+						<picture class="main__box-container-picture">
+							<source srcset="" />
+							<img
+								src="../src/img/image-creme-brulee-mobile.jpg"
+								alt="Food picture"
+								class="main__box-container-picture-img" />
+						</picture>
+						<button class="main__box-container-btn">
+							<img src="../src/img/icon-add-to-cart.svg" alt="Cart icon" class="main__box-container-btn-cart" />Add to
+							Cart
+						</button>
+						<div class="main__box-container-select">
+							<button class="main__box-container-select-icon minus">
+								<img src="../src/img/icon-decrement-quantity.svg" alt="minus icon" />
+							</button>
+							<p class="main__box-container-select-quanity" data-setting="quanity" data-index="1">1</p>
+							<button class="main__box-container-select-icon plus">
+								<img src="../src/img/icon-increment-quantity.svg" alt="plus icon" />
+							</button>
+						</div>
+					</div>
+					<div class="main__box-text">
+						<p class="main__box-text-type">Waffle</p>
+						<p class="main__box-text-name">Waffle with Berries</p>
+						<p class="main__box-text-price">$4.00</p>
+					</div>
 				</div>
+			</div>
+			<div class="main__summary">
+				<h2 class="main__summary-title">Your Cart (<span>0</span>)</h2>
+				<img src="../src/img/illustration-empty-cart.svg" alt="Chocolate cake" class="main__summary-img" />
+				<p class="main__summary-text">Your added items will appear here</p>
+				<div class="main__summary-item">
+					<h3 class="main__summary-item-title">bakłażan</h3>
+					<div class="main__summary-item-amount">
+						<p class="main__summary-item-amount-quantity">0x</p>
+						<p class="main__summary-item-amount-one">@$5.50</p>
+						<p class="main__summary-item-amount-bulk">$8.00</p>
+					</div>
+					<button class="main__summary-item-btn">
+						<img src="../src/img/icon-remove-item.svg" alt="X icon" class="main__summary-item-btn-img" />
+					</button>
+				</div>
+				<div class="main__summary-item">
+					<h3 class="main__summary-item-title">jajecznica</h3>
+					<div class="main__summary-item-amount">
+						<p class="main__summary-item-amount-quantity">0x</p>
+						<p class="main__summary-item-amount-one">@$2.50</p>
+						<p class="main__summary-item-amount-bulk">$1.11</p>
+					</div>
+					<button class="main__summary-item-btn">
+						<img src="../src/img/icon-remove-item.svg" alt="X icon" class="main__summary-item-btn-img" />
+					</button>
+				</div>
+				<div class="main__summary-total">
+					<h3 class="main__summary-total-title">Order Total</h3>
+					<p class="main__summary-total-price">$33.33</p>
+				</div>
+				<div class="main__summary-info">
+					<img src="../src/img/icon-carbon-neutral.svg" alt="Gust icon" class="main__summary-info-img" />
+					<p class="main__summary-info-text">This is a <span>carbon-neutral</span> delivery</p>
+				</div>
+				<button class="main__summary-btn">Confirm Order</button>
 			</div>
 		</main>
 
