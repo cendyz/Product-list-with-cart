@@ -111,6 +111,7 @@ body {
 .main__box-container-btn-cart {
   width: 1.7rem;
   height: 1.7rem;
+  pointer-events: none;
 }
 .main__box-container-select {
   display: none;
