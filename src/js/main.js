@@ -33,7 +33,7 @@ const selectQuanity = e => {
 						<p class="main__summary-item-amount-bulk">$1.11</p>
 					</div>
 					<button class="main__summary-item-btn">
-						<img src="../src/img/icon-remove-item.svg" alt="X icon" class="main__summary-item-btn-img" />
+						<img src="./src/img/icon-remove-item.svg" alt="X icon" class="main__summary-item-btn-img" />
 					</button>`;
 
 	cartBox.append(div);
