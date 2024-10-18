@@ -1,64 +1,73 @@
 const addToCartBtn = document.querySelectorAll(".main__box-container-btn");
-const selectContainer = document.querySelectorAll(".main__box-container-select");
-const foodImage = document.querySelectorAll(".main__box-container-picture-img");
-const minusIcon = document.querySelectorAll(".minus");
+const selectBtn = document.querySelectorAll(".main__box-container-select");
+const cartItems = document.querySelector(".main__summary-title span");
 const plusIcon = document.querySelectorAll(".plus");
-const quanityNumber = document.querySelectorAll('[data-setting="quanity"]');
-const cartBox = document.querySelector(".main__summary");
-const cartQuanity = document.querySelector(".main__summary-title span");
-const summaryImg = document.querySelector(".main__summary-img");
-const summaryText = document.querySelector(".main__summary-text");
-const netPrice = document.querySelectorAll(".main__box-text-price span");
-const foodName = document.querySelectorAll(".main__box-text-name");
+const minusIcon = document.querySelectorAll(".minus");
+const foodQuantity = document.querySelectorAll(".main__box-container-select-quanity");
+const emptySummaryBox = document.querySelector(".main__summary-box");
+const itemsSummaryBox = document.querySelector(".main__summary-items");
+const totalSummaryBox = document.querySelector(".main__summary-total");
+const infoSummaryBox = document.querySelector(".main__summary-info");
+let cart = 0;
 
-const food = [0, 0];
+fetch("./data.json")
+	.then(response => response.json())
+	.then(data => {
+		console.log(data[0]);
 
-const selectQuanity = e => {
-	const index = Array.from(addToCartBtn).indexOf(e.target);
-	const div = document.createElement("div");
+		addToCartBtn.forEach(btn => {
+			btn.addEventListener("click", e => {
+				const indexAddBtn = Array.from(addToCartBtn).indexOf(e.target);
+				const div = document.createElement('div')
 
-	div.classList.add("main__summary-item");
-	selectContainer[index].style.display = "flex";
-	addToCartBtn[index].style.display = "none";
-	foodImage[index].style.border = "2.2px solid hsl(14, 86%, 42%)";
-	food[index] = 1;
-	quanityNumber[index].textContent = food[index];
-};
+				addToCartBtn[indexAddBtn].style.display = "none";
+				selectBtn[indexAddBtn].style.display = "flex";
+				cart++;
+				cartItems.textContent = cart;
 
-const decreaseQuanity = e => {
-	const one = document.querySelectorAll(".main__summary-item-amount-quantity");
-	const index = Array.from(minusIcon).indexOf(e.target);
-	food[index]--;
-	quanityNumber[index].textContent = food[index];
-	if (food[index] === 0) {
-		selectContainer[index].style.display = "none";
-		addToCartBtn[index].style.display = "flex";
-		foodImage[index].style.border = "2.2px solid transparent";
-	}
-};
+				emptySummaryBox.style.display = "none";
+				itemsSummaryBox.style.display = "inline-flex";
+				totalSummaryBox.style.display = 'flex'
+				infoSummaryBox.style.display = 'flex'
+			});
+		});
 
-const increaseQuanity = e => {
-	const one = document.querySelectorAll(".main__summary-item-amount-quantity");
-	const index = Array.from(plusIcon).indexOf(e.target);
-	food[index]++;
-	quanityNumber[index].textContent = food[index];
-};
+		minusIcon.forEach(icon => {
+			icon.addEventListener("click", e => {
+				const minusIconIndex = Array.from(minusIcon).indexOf(e.target);
+				let numFoodQuantity = parseFloat(foodQuantity[minusIconIndex].textContent);
+				numFoodQuantity--;
+				foodQuantity[minusIconIndex].textContent = numFoodQuantity
+				
+				if(numFoodQuantity < 1) {
+					addToCartBtn[minusIconIndex].style.display = "flex";
+					selectBtn[minusIconIndex].style.display = "none";
+					numFoodQuantity = 1
+					foodQuantity[minusIconIndex].textContent = numFoodQuantity;
+					cart--
+					cartItems.textContent = cart;
 
-const handleOrder = () => {
-	if (cartQuanity >= 1) {
-		summaryImg.style.display = "none";
-		summaryText.style.display = "none";
-	}
-};
+					if(cart === 0) {
+						emptySummaryBox.style.display = "flex";
+						itemsSummaryBox.style.display = "none";
+						totalSummaryBox.style.display = "none";
+						infoSummaryBox.style.display = "none";
+					}
 
-addToCartBtn.forEach(btn => {
-	btn.addEventListener("click", selectQuanity);
-});
+				}
 
-minusIcon.forEach(btn => {
-	btn.addEventListener("click", decreaseQuanity);
-});
+			});
+		});
 
-plusIcon.forEach(btn => {
-	btn.addEventListener("click", increaseQuanity);
-});
+		plusIcon.forEach(icon => {
+			icon.addEventListener('click', (e) => {
+				const plusIconIndex = Array.from(plusIcon).indexOf(e.target);
+					let numFoodQuantity = parseFloat(foodQuantity[plusIconIndex].textContent);
+					numFoodQuantity++;
+					foodQuantity[plusIconIndex].textContent = numFoodQuantity;
+
+					
+			})
+		})
+	})
+	.catch(error => console.error("Error:", error));
