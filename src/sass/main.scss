@@ -383,6 +383,10 @@ body {
 						&:hover {
 							background-color: var(--rose-50);
 						}
+
+						&-x {
+							pointer-events: none;
+						}
 					}
 				}
 			}

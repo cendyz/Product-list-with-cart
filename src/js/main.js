@@ -12,7 +12,7 @@ const totalPrice = document.querySelector(".main__summary-total-price");
 let cart = 0;
 let id;
 let newItemsSummaryBox = [];
-let deleteBtns = []
+let deleteBtns = [];
 let total = [];
 let totalSum;
 
@@ -42,8 +42,9 @@ fetch("./data.json")
 							<p class="main__summary-items-info-prices-all">$${data[indexAddBtn].price.toFixed(2)}</p>
 						</div>
 					</div>
-					<div class="main__summary-items-info-img" id=${indexAddBtn}>
+					<div class="main__summary-items-info-img" id="" onclick="deleteItems(event)">
 						<img src="./src/img/icon-remove-item.svg" alt="X icon" class="main__summary-items-info-img-x">
+					</div>
 					</div>`;
 
 				emptySummaryBox.insertAdjacentElement("afterend", div);
@@ -135,13 +136,34 @@ fetch("./data.json")
 				totalPrice.textContent = `$${totalSum.toFixed(2)}`;
 			});
 		});
-
-		deleteBtns.forEach(btn => {
-			btn.addEventListener('click', (e) => {
-				const indexAddBtn = Array.from(addToCartBtn).indexOf(e.target);
-				const item = deleteBtns.find(div => div.id === `${indexAddBtn}`);
-				console.log(item);
-			})
-		})
 	})
 	.catch(error => console.error("Error:", error));
+
+const deleteItems = e => {
+	const itemToDelete = e.target.parentElement;
+	const itemId = itemToDelete.getAttribute("id");
+	const numId = parseFloat(itemId);
+
+	const price = itemToDelete.querySelector(".main__summary-items-info-prices-all");
+	const priceNum = price.textContent.replace(/\$/g, "");
+	const priceNumParse = parseFloat(priceNum);
+	const minusNum = -priceNumParse;
+
+	total.push(minusNum);
+	totalSum = total.reduce((acc, value) => acc + value, 0);
+	totalPrice.textContent = `$${totalSum.toFixed(2)}`;
+
+	cart--;
+	cartItems.textContent = cart;
+
+	addToCartBtn[numId].style.display = "flex";
+	selectBtn[numId].style.display = "none";
+	itemToDelete.remove();
+	
+	if (cartItems.textContent === "0") {
+		emptySummaryBox.style.display = "flex";
+		totalSummaryBox.style.display = "none";
+		confirmBtn.style.display = "none";
+		infoSummaryBox.style.display = "none";
+	}
+};

@@ -405,4 +405,7 @@ body {
   .main__summary-items-info-img:hover {
     background-color: var(--rose-50);
   }
+  .main__summary-items-info-img-x {
+    pointer-events: none;
+  }
 }/*# sourceMappingURL=main.css.map */
