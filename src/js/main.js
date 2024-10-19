@@ -5,19 +5,20 @@ const plusIcon = document.querySelectorAll(".plus");
 const minusIcon = document.querySelectorAll(".minus");
 const foodQuantity = document.querySelectorAll(".main__box-container-select-quanity");
 const emptySummaryBox = document.querySelector(".main__summary-box");
-const itemsSummaryBox = document.querySelector(".main__summary-items");
 const totalSummaryBox = document.querySelector(".main__summary-total");
 const infoSummaryBox = document.querySelector(".main__summary-info");
-const mainSummary = document.querySelector(".main__summary");
+const confirmBtn = document.querySelector(".main__summary-btn");
 const totalPrice = document.querySelector(".main__summary-total-price");
 let cart = 0;
 let id;
 let newItemsSummaryBox = [];
+let deleteBtns = []
 let total = [];
 let totalSum;
 
 const updateItemsSummary = () => {
 	newItemsSummaryBox = Array.from(document.querySelectorAll(".main__summary-items"));
+	deleteBtns = Array.from(document.querySelectorAll(".main__summary-items-info-img"));
 };
 
 fetch("./data.json")
@@ -41,7 +42,7 @@ fetch("./data.json")
 							<p class="main__summary-items-info-prices-all">$${data[indexAddBtn].price.toFixed(2)}</p>
 						</div>
 					</div>
-					<div class="main__summary-items-info-img">
+					<div class="main__summary-items-info-img" id=${indexAddBtn}>
 						<img src="./src/img/icon-remove-item.svg" alt="X icon" class="main__summary-items-info-img-x">
 					</div>`;
 
@@ -51,12 +52,9 @@ fetch("./data.json")
 
 				total.push(data[indexAddBtn].price);
 
-				total.forEach(value => {
-					totalSum += value;
-				});
 				totalSum = total.reduce((acc, value) => acc + value, 0);
 
-				totalPrice.textContent = `$${totalSum.toFixed(2)}`
+				totalPrice.textContent = `$${totalSum.toFixed(2)}`;
 
 				addToCartBtn[indexAddBtn].style.display = "none";
 				selectBtn[indexAddBtn].style.display = "flex";
@@ -66,6 +64,7 @@ fetch("./data.json")
 				emptySummaryBox.style.display = "none";
 				totalSummaryBox.style.display = "flex";
 				infoSummaryBox.style.display = "flex";
+				confirmBtn.style.display = "block";
 			});
 		});
 
@@ -82,8 +81,15 @@ fetch("./data.json")
 				const all = item.querySelector(".main__summary-items-info-prices-all");
 
 				let fixed = numFoodQuantity * data[minusIconIndex].price;
+				let newFixed = fixed.toFixed(2);
 				quantity.innerText = `${numFoodQuantity}x`;
-				all.innerText = `$${fixed.toFixed(2)}`;
+				all.innerText = `$${newFixed}`;
+				let newNumber = data[minusIconIndex].price;
+				let negativeNumber = -newNumber;
+
+				total.push(negativeNumber);
+				totalSum = total.reduce((acc, value) => acc + value, 0);
+				totalPrice.textContent = `$${totalSum.toFixed(2)}`;
 
 				if (numFoodQuantity < 1) {
 					addToCartBtn[minusIconIndex].style.display = "flex";
@@ -97,6 +103,13 @@ fetch("./data.json")
 				if (foodQuantity[minusIconIndex].textContent === "0") {
 					item.remove();
 					updateItemsSummary();
+				}
+
+				if (totalPrice.textContent === "$0.00") {
+					emptySummaryBox.style.display = "flex";
+					totalSummaryBox.style.display = "none";
+					infoSummaryBox.style.display = "none";
+					confirmBtn.style.display = "none";
 				}
 			});
 		});
@@ -112,10 +125,23 @@ fetch("./data.json")
 				let numFoodQuantity = parseFloat(foodQuantity[plusIconIndex].textContent);
 				numFoodQuantity++;
 				let fixed = numFoodQuantity * data[plusIconIndex].price;
+				let newFixed = fixed.toFixed(2);
+
 				foodQuantity[plusIconIndex].textContent = numFoodQuantity;
 				quantity.innerText = `${numFoodQuantity}x`;
-				all.innerText = `$${fixed.toFixed(2)}`;
+				all.innerText = `$${newFixed}`;
+				total.push(data[plusIconIndex].price);
+				totalSum = total.reduce((acc, value) => acc + value, 0);
+				totalPrice.textContent = `$${totalSum.toFixed(2)}`;
 			});
 		});
+
+		deleteBtns.forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				const indexAddBtn = Array.from(addToCartBtn).indexOf(e.target);
+				const item = deleteBtns.find(div => div.id === `${indexAddBtn}`);
+				console.log(item);
+			})
+		})
 	})
 	.catch(error => console.error("Error:", error));

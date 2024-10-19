@@ -64,7 +64,7 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: "Red Hat Text", sans-serif;
-  background-color: var(--rose-100);
+  background-color: var(--rose-50);
   color: var(--rose-900);
 }
 
@@ -123,8 +123,8 @@ body {
   outline-color: var(--red);
 }
 .main__box-container-btn-cart {
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 2.2rem;
+  height: 2.2rem;
   pointer-events: none;
 }
 .main__box-container-select {
@@ -143,8 +143,8 @@ body {
   border-radius: 100vw;
 }
 .main__box-container-select-icon {
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 2.2rem;
+  height: 2.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -155,8 +155,8 @@ body {
   cursor: pointer;
 }
 .main__box-container-select-icon img {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 1.4rem;
+  height: 1.4rem;
   pointer-events: none;
 }
 .main__box-text {
@@ -188,7 +188,7 @@ body {
   align-items: center;
   gap: 1.5rem;
   padding: 2em;
-  background-color: var(--rose-50);
+  background-color: var(--rose-100);
   border-radius: 1em;
   justify-self: center;
 }
@@ -359,7 +359,7 @@ body {
     padding: 4em;
   }
   .main {
-    max-width: 70em;
+    max-width: 80em;
     grid-template-columns: 1fr minmax(24rem, auto);
     grid-template-areas: "heading cart" "items cart";
   }
@@ -369,7 +369,7 @@ body {
     height: fit-content;
   }
   .main__box {
-    grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
     grid-area: items;
   }
   .main__box-container-btn {
@@ -379,11 +379,30 @@ body {
     color: var(--rose-400);
     border: 1px solid var(--red);
   }
+  .main__box-container-select-icon {
+    transition: background-color 0.1s;
+  }
+  .main__box-container-select-icon:hover {
+    background-color: hsl(14, 86%, 36%);
+  }
   .main__summary {
     width: 400px;
     height: -moz-max-content;
     height: max-content;
     margin-left: 1.5em;
     grid-area: cart;
+  }
+  .main__summary-btn {
+    transition: background-color 0.2s;
+  }
+  .main__summary-btn:hover {
+    background-color: hsl(14, 86%, 36%);
+  }
+  .main__summary-items-info-img {
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .main__summary-items-info-img:hover {
+    background-color: var(--rose-50);
   }
 }/*# sourceMappingURL=main.css.map */

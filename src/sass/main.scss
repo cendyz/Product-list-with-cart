@@ -17,7 +17,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	font-family: "Red Hat Text", sans-serif;
-	background-color: var(--rose-100);
+	background-color: var(--rose-50);
 	color: var(--rose-900);
 }
 
@@ -75,8 +75,8 @@ body {
 				border-radius: 100vw;
 				outline-color: var(--red);
 				&-cart {
-					width: 1.7rem;
-					height: 1.7rem;
+					width: 2.2rem;
+					height: 2.2rem;
 					pointer-events: none;
 				}
 			}
@@ -95,8 +95,8 @@ body {
 				border: 1px solid var(--red);
 				border-radius: 100vw;
 				&-icon {
-					width: 1.7rem;
-					height: 1.7rem;
+					width: 2.2rem;
+					height: 2.2rem;
 					display: flex;
 					justify-content: center;
 					align-items: center;
@@ -107,8 +107,8 @@ body {
 					cursor: pointer;
 
 					img {
-						width: 0.8rem;
-						height: 0.8rem;
+						width: 1.4rem;
+						height: 1.4rem;
 						pointer-events: none;
 					}
 				}
@@ -144,7 +144,7 @@ body {
 		align-items: center;
 		gap: 1.5rem;
 		padding: 2em;
-		background-color: var(--rose-50);
+		background-color: var(--rose-100);
 		border-radius: 1em;
 		justify-self: center;
 		&-title {
@@ -165,13 +165,13 @@ body {
 
 			&-info {
 				&-title {
-					margin-bottom: .5em;
+					margin-bottom: 0.5em;
 					font-size: 1.5rem;
 				}
 
 				&-prices {
 					display: flex;
-					column-gap: .7em;
+					column-gap: 0.7em;
 					font-size: 1.5rem;
 
 					&-quantity {
@@ -196,7 +196,6 @@ body {
 				}
 			}
 		}
-
 
 		&-box {
 			display: flex;
@@ -326,7 +325,7 @@ body {
 		padding: 4em;
 	}
 	.main {
-		max-width: 70em;
+		max-width: 80em;
 		grid-template-columns: 1fr minmax(24rem, auto);
 		grid-template-areas:
 			"heading cart"
@@ -338,7 +337,7 @@ body {
 		}
 
 		&__box {
-			grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
 			grid-area: items;
 			&-container {
 				&-btn {
@@ -349,6 +348,16 @@ body {
 						border: 1px solid var(--red);
 					}
 				}
+
+				&-select {
+					&-icon {
+						transition: background-color 0.1s;
+
+						&:hover {
+							background-color: hsl(14, 86%, 36%);
+						}
+					}
+				}
 			}
 		}
 		&__summary {
@@ -356,6 +365,27 @@ body {
 			height: max-content;
 			margin-left: 1.5em;
 			grid-area: cart;
+
+			&-btn {
+				transition: background-color .2s;
+
+				&:hover {
+					background-color: hsl(14, 86%, 36%);
+				}
+			}
+
+			&-items {
+				&-info {
+					&-img {
+						cursor: pointer;
+						transition: background-color .2s;
+
+						&:hover {
+							background-color: var(--rose-50);
+						}
+					}
+				}
+			}
 		}
 	}
 }
