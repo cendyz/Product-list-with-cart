@@ -9,6 +9,9 @@ const totalSummaryBox = document.querySelector(".main__summary-total");
 const infoSummaryBox = document.querySelector(".main__summary-info");
 const confirmBtn = document.querySelector(".main__summary-btn");
 const totalPrice = document.querySelector(".main__summary-total-price");
+const newOrderBtn = document.querySelector(".main__popup-box-item-btn");
+const popup = document.querySelector(".main__popup");
+const shadow = document.querySelector(".shadow");
 let cart = 0;
 let id;
 let newItemsSummaryBox = [];
@@ -159,7 +162,7 @@ const deleteItems = e => {
 	addToCartBtn[numId].style.display = "flex";
 	selectBtn[numId].style.display = "none";
 	itemToDelete.remove();
-	
+
 	if (cartItems.textContent === "0") {
 		emptySummaryBox.style.display = "flex";
 		totalSummaryBox.style.display = "none";
@@ -167,3 +170,27 @@ const deleteItems = e => {
 		infoSummaryBox.style.display = "none";
 	}
 };
+
+const show = e => {
+	console.log(e.target);
+};
+
+// document.addEventListener('click', show)
+const showOrder = () => {
+	popup.style.display = "block";
+	shadow.style.display = "block";
+	window.scrollTo({
+		top: 0,
+		behavior: "smooth",
+	});
+	document.body.style.overflow = "hidden";
+};
+
+const newOrder = () => {
+	popup.style.display = "none";
+	shadow.style.display = "none";
+	document.body.style.overflow = "visible";
+};
+
+confirmBtn.addEventListener("click", showOrder);
+newOrderBtn.addEventListener("click", newOrder);

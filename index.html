@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Page</title>
-		<link rel="icon" type="image/x-icon" href="./src/img/favicon-32x32.png">
+		<link rel="icon" type="image/x-icon" href="./src/img/favicon-32x32.png" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -184,7 +184,6 @@
 							<p class="main__box-container-select-quanity" data-setting="quanity" data-index="1">1</p>
 							<button class="main__box-container-select-icon plus">
 								<img src="./src/img/icon-increment-quantity.svg" alt="plus icon" />
-								
 							</button>
 						</div>
 					</div>
@@ -285,22 +284,9 @@
 			<div class="main__summary">
 				<h2 class="main__summary-title">Your Cart (<span>0</span>)</h2>
 				<div class="main__summary-box">
-					<img src="./src/img/illustration-empty-cart.svg" alt="Chocolate cake" class="main__summary-box-img"/>
+					<img src="./src/img/illustration-empty-cart.svg" alt="Chocolate cake" class="main__summary-box-img" />
 					<p class="main__summary-box-text">Your added items will appear here</p>
 				</div>
-				<!-- <div class="main__summary-items">
-					<div class="main__summary-items-info">
-						<h3 class="main__summary-items-info-title">Classic Tiramisu</h3>
-						<div class="main__summary-items-info-prices">
-							<p class="main__summary-items-info-prices-quantity">1x</p>
-							<p class="main__summary-items-info-prices-one">@5.50</p>
-							<p class="main__summary-items-info-prices-all">$11.00</p>
-						</div>
-					</div>
-					<div class="main__summary-items-info-img">
-						<img src="./src/img/icon-remove-item.svg" alt="X icon" class="main__summary-items-info-img-x">
-					</div>
-				</div> -->
 				<div class="main__summary-total">
 					<h3 class="main__summary-total-title">Order Total</h3>
 					<p class="main__summary-total-price">$0.00</p>
@@ -311,7 +297,53 @@
 				</div>
 				<button class="main__summary-btn">Confirm Order</button>
 			</div>
+			<div class="main__popup">
+				<img src="./src/img/icon-order-confirmed.svg" alt="Confirm icon" class="main__popup-img" />
+				<h2 class="main__popup-title">Order Confirmed</h2>
+				<p class="main__popup-text">We hope you enjoy your food!</p>
+				<div class="main__popup-box">
+					<div class="main__popup-box-item">
+						<div class="main__popup-box-item-left">
+							<img src="./src/img/image-baklava-thumbnail.jpg" alt="baklava" class="main__popup-box-item-left-img" />
+							<div class="main__popup-box-item-left-texts">
+								<h3 class="main__popup-box-item-left-texts-title">Classic Tiramisu</h3>
+								<p class="main__popup-box-item-left-texts-quantity">1x</p>
+								<p class="main__popup-box-item-left-texts-one">@ <span>$5.50</span></p>
+							</div>
+						</div>
+						<p class="main__popup-box-all">$5.50</p>
+					</div>
+					<div class="main__popup-box-item">
+						<div class="main__popup-box-item-left">
+							<img src="./src/img/image-baklava-thumbnail.jpg" alt="baklava" class="main__popup-box-item-left-img" />
+							<div class="main__popup-box-item-left-texts">
+								<h3 class="main__popup-box-item-left-texts-title">Classic Tiramisu</h3>
+								<p class="main__popup-box-item-left-texts-quantity">1x</p>
+								<p class="main__popup-box-item-left-texts-one">@ <span>$5.50</span></p>
+							</div>
+						</div>
+						<p class="main__popup-box-all">$5.50</p>
+					</div>
+					<div class="main__popup-box-item">
+						<div class="main__popup-box-item-left">
+							<img src="./src/img/image-baklava-thumbnail.jpg" alt="baklava" class="main__popup-box-item-left-img" />
+							<div class="main__popup-box-item-left-texts">
+								<h3 class="main__popup-box-item-left-texts-title">Classic Tiramisu</h3>
+								<p class="main__popup-box-item-left-texts-quantity">1x</p>
+								<p class="main__popup-box-item-left-texts-one">@ <span>$5.50</span></p>
+							</div>
+						</div>
+						<p class="main__popup-box-all">$5.50</p>
+					</div>
+					<div class="main__popup-box-item-total">
+						<p class="main__popup-box-item-total-text">Order Total</p>
+						<p class="main__popup-box-item-total-num">$43.28</p>
+					</div>
+				</div>
+				<button class="main__popup-box-item-btn">Start New Order</button>
+			</div>
 		</main>
+		<div class="shadow"></div>
 
 		<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 		<script src="./src/js/main.js"></script>

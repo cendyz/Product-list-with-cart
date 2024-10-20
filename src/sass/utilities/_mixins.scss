@@ -1,0 +1,9 @@
+@mixin btn {
+	margin-top: 0.5em;
+	height: 4.3rem;
+	width: 100%;
+	font-size: 1.5rem;
+	background-color: var(--red);
+	color: var(--rose-50);
+	border-radius: 1.5em;
+}
