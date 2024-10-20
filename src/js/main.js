@@ -45,7 +45,7 @@ fetch("./data.json")
 							<p class="main__summary-items-info-prices-all">$${data[indexAddBtn].price.toFixed(2)}</p>
 						</div>
 					</div>
-					<div class="main__summary-items-info-img" id="" onclick="deleteItems(event)">
+					<div class="main__summary-items-info-img" onclick="deleteItems(event)">
 						<img src="./src/img/icon-remove-item.svg" alt="X icon" class="main__summary-items-info-img-x">
 					</div>
 					</div>`;
@@ -171,11 +171,6 @@ const deleteItems = e => {
 	}
 };
 
-const show = e => {
-	console.log(e.target);
-};
-
-// document.addEventListener('click', show)
 const showOrder = () => {
 	popup.style.display = "block";
 	shadow.style.display = "block";
@@ -190,6 +185,31 @@ const newOrder = () => {
 	popup.style.display = "none";
 	shadow.style.display = "none";
 	document.body.style.overflow = "visible";
+
+	addToCartBtn.forEach(btn => {
+		btn.style.display = "flex";
+	});
+
+	selectBtn.forEach(btn => {
+		btn.style.display = "none";
+	});
+
+	cart = 0;
+	cartItems.textContent = cart;
+
+	emptySummaryBox.style.display = "flex";
+	totalSummaryBox.style.display = "none";
+	infoSummaryBox.style.display = "none";
+	confirmBtn.style.display = "none";
+
+	newItemsSummaryBox.forEach(item => {
+		item.remove();
+	});
+	deleteBtns.forEach(item => {
+		item.remove();
+	});
+
+	total = [];
 };
 
 confirmBtn.addEventListener("click", showOrder);

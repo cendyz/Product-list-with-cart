@@ -212,6 +212,12 @@ body {
   margin-bottom: 0.5em;
   font-size: 1.5rem;
 }
+.main__summary-items-info-img {
+  cursor: pointer;
+}
+.main__summary-items-info-img-x {
+  pointer-events: none;
+}
 .main__summary-items-info-prices {
   display: flex;
   -moz-column-gap: 0.7em;
@@ -524,8 +530,5 @@ body {
   }
   .main__summary-items-info-img:hover {
     background-color: var(--rose-50);
-  }
-  .main__summary-items-info-img-x {
-    pointer-events: none;
   }
 }/*# sourceMappingURL=main.css.map */
