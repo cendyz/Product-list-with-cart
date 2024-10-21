@@ -11,6 +11,8 @@ const confirmBtn = document.querySelector(".main__summary-btn");
 const totalPrice = document.querySelector(".main__summary-total-price");
 const newOrderBtn = document.querySelector(".main__popup-box-item-btn");
 const popup = document.querySelector(".main__popup");
+const popupBox = document.querySelector(".main__popup-box");
+const orderTotal = document.querySelector(".main__popup-box-item-total-num");
 const shadow = document.querySelector(".shadow");
 let cart = 0;
 let id;
@@ -18,10 +20,12 @@ let newItemsSummaryBox = [];
 let deleteBtns = [];
 let total = [];
 let totalSum;
+let finalItems = [];
 
 const updateItemsSummary = () => {
 	newItemsSummaryBox = Array.from(document.querySelectorAll(".main__summary-items"));
 	deleteBtns = Array.from(document.querySelectorAll(".main__summary-items-info-img"));
+	finalItems = Array.from(document.querySelectorAll(".main__popup-box-item"));
 };
 
 fetch("./data.json")
@@ -32,6 +36,10 @@ fetch("./data.json")
 				const indexAddBtn = Array.from(addToCartBtn).indexOf(e.target);
 				id = indexAddBtn;
 				foodQuantity[indexAddBtn].textContent = 1;
+
+				const orderDiv = document.createElement("div");
+				orderDiv.classList.add("main__popup-box-item");
+				orderDiv.setAttribute("id", id);
 
 				const div = document.createElement("div");
 				div.classList.add("main__summary-items");
@@ -51,6 +59,19 @@ fetch("./data.json")
 					</div>`;
 
 				emptySummaryBox.insertAdjacentElement("afterend", div);
+				console.log(data[0].name);
+
+				orderDiv.innerHTML = `<div class="main__popup-box-item-left">
+				<img src="${data[indexAddBtn].image.thumbnail}" alt="${data[indexAddBtn].name}" class="main__popup-box-item-left-img" />
+				<div class="main__popup-box-item-left-texts">
+				<h3 class="main__popup-box-item-left-texts-title">${data[indexAddBtn].name}</h3>
+				<p class="main__popup-box-item-left-texts-quantity">1x</p>
+				<p class="main__popup-box-item-left-texts-one">@ <span>$${data[indexAddBtn].price.toFixed(2)}</span></p>
+				</div>
+				</div>
+				<p class="main__popup-box-all">$${data[indexAddBtn].price.toFixed(2)}</p>`;
+
+				popupBox.insertAdjacentElement("afterbegin", orderDiv);
 
 				updateItemsSummary();
 
@@ -59,6 +80,7 @@ fetch("./data.json")
 				totalSum = total.reduce((acc, value) => acc + value, 0);
 
 				totalPrice.textContent = `$${totalSum.toFixed(2)}`;
+				orderTotal.textContent = `$${totalSum.toFixed(2)}`;
 
 				addToCartBtn[indexAddBtn].style.display = "none";
 				selectBtn[indexAddBtn].style.display = "flex";
@@ -80,6 +102,10 @@ fetch("./data.json")
 				foodQuantity[minusIconIndex].textContent = numFoodQuantity;
 
 				const item = newItemsSummaryBox.find(div => div.id === `${minusIconIndex}`);
+				const orderItem = finalItems.find(div => div.id === `${minusIconIndex}`);
+
+				const orderQuantity = orderItem.querySelector(".main__popup-box-item-left-texts-quantity");
+				const orderAll = orderItem.querySelector(".main__popup-box-all");
 
 				const quantity = item.querySelector(".main__summary-items-info-prices-quantity");
 				const all = item.querySelector(".main__summary-items-info-prices-all");
@@ -87,13 +113,16 @@ fetch("./data.json")
 				let fixed = numFoodQuantity * data[minusIconIndex].price;
 				let newFixed = fixed.toFixed(2);
 				quantity.innerText = `${numFoodQuantity}x`;
+				orderQuantity.innerText = `${numFoodQuantity}x`;
 				all.innerText = `$${newFixed}`;
+				orderAll.innerText = `$${newFixed}`;
 				let newNumber = data[minusIconIndex].price;
 				let negativeNumber = -newNumber;
 
 				total.push(negativeNumber);
 				totalSum = total.reduce((acc, value) => acc + value, 0);
 				totalPrice.textContent = `$${totalSum.toFixed(2)}`;
+				orderTotal.textContent = `$${totalSum.toFixed(2)}`;
 
 				if (numFoodQuantity < 1) {
 					addToCartBtn[minusIconIndex].style.display = "flex";
@@ -106,6 +135,7 @@ fetch("./data.json")
 
 				if (foodQuantity[minusIconIndex].textContent === "0") {
 					item.remove();
+					orderItem.remove();
 					updateItemsSummary();
 				}
 
@@ -122,9 +152,12 @@ fetch("./data.json")
 			icon.addEventListener("click", e => {
 				const plusIconIndex = Array.from(plusIcon).indexOf(e.target);
 				const item = newItemsSummaryBox.find(div => div.id === `${plusIconIndex}`);
+				const orderItem = finalItems.find(div => div.id === `${plusIconIndex}`);
 
 				const quantity = item.querySelector(".main__summary-items-info-prices-quantity");
 				const all = item.querySelector(".main__summary-items-info-prices-all");
+				const orderQuantity = orderItem.querySelector(".main__popup-box-item-left-texts-quantity");
+				const orderAll = orderItem.querySelector(".main__popup-box-all");
 
 				let numFoodQuantity = parseFloat(foodQuantity[plusIconIndex].textContent);
 				numFoodQuantity++;
@@ -133,10 +166,14 @@ fetch("./data.json")
 
 				foodQuantity[plusIconIndex].textContent = numFoodQuantity;
 				quantity.innerText = `${numFoodQuantity}x`;
+				orderQuantity.innerText = `${numFoodQuantity}x`;
+
 				all.innerText = `$${newFixed}`;
+				orderAll.innerText = `$${newFixed}`;
 				total.push(data[plusIconIndex].price);
 				totalSum = total.reduce((acc, value) => acc + value, 0);
 				totalPrice.textContent = `$${totalSum.toFixed(2)}`;
+				orderTotal.textContent = `$${totalSum.toFixed(2)}`;
 			});
 		});
 	})
@@ -171,7 +208,7 @@ const deleteItems = e => {
 	}
 };
 
-const showOrder = () => {
+const showOrder = e => {
 	popup.style.display = "block";
 	shadow.style.display = "block";
 	window.scrollTo({
@@ -206,6 +243,9 @@ const newOrder = () => {
 		item.remove();
 	});
 	deleteBtns.forEach(item => {
+		item.remove();
+	});
+	finalItems.forEach(item => {
 		item.remove();
 	});
 
